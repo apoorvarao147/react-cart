@@ -1,0 +1,55 @@
+.order-summary {
+  width: 40%;
+  height: 420px;
+  background-color: white;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 10px;
+  padding: 1rem;
+
+  >h3 {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+
+  >div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    >button {
+      border: none;
+      padding: 1rem;
+      background-color: rgb(255,214,19);
+      border-radius: 2rem;
+      margin-top: 1rem;
+      font-size: 15px;
+
+      &:hover {
+        background-color: rgb(221, 186, 10);
+      }
+    }
+
+    >div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;            
+    }
+    .order-tax {
+      padding-top: 1rem;
+      border-top: 1px solid rgb(222, 222, 222);
+      
+    }
+
+    .order-total {
+      padding-top: 15px;
+      border-top: 1px solid rgb(222, 222, 222);
+      
+      >h2 {
+        color: rgb(177, 39, 4);
+        font-size: 23px;
+      }
+    }
+  }
+  
+}
