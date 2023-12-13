@@ -1,26 +1,22 @@
 //@ts-nocheck
 import "../styles/home.scss";
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 
-function Home({cart, setCart}) {
-
-  const[products, setProducts] = useState<any>([])
-
-  // const[cart, setCart] = useState<any>([])
+function Home({ cart, setCart }) {
+  const [products, setProducts] = useState<any>([]);
 
   useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = async () => {
       let data = await fetch(`${process.env.REACT_APP_BACKEND_API}/product`);
-      data = await data.json()
-      setProducts(data)
-    }
+      data = await data.json();
+      setProducts(data);
+    };
     fetchData();
-},[])
+  }, []);
 
-  
   const addToCartHandler = (options: any) => {
-    setCart([...cart, options])
-    // console.log(cart);
+    console.log(cart)
+    setCart([...cart, options]);
   };
 
   return (
@@ -44,17 +40,23 @@ type ProductCardProps = {
   name: string;
   imgSrc: string;
   price: number;
-  handler: any
-}
+  handler: any;
+};
 
-const ProductCard = ({ id, name, imgSrc, price, handler }: ProductCardProps) => (
+const ProductCard = ({
+  id,
+  name,
+  imgSrc,
+  price,
+  handler,
+}: ProductCardProps) => (
   <div className="productCard">
     <div>
       <img src={imgSrc} alt={name} />
     </div>
     <p>{name}</p>
-    <h4>${(price/100).toFixed(2)}</h4>
-    <button onClick={() => handler({ name, price, id, quantity: 1, imgSrc })}>
+    <h4>${(price / 100).toFixed(2)}</h4>
+    <button onClick={() => handler({ name, price, id, imgSrc, quantity: 1 })}>
       Add to Cart
     </button>
   </div>

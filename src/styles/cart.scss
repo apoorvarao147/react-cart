@@ -65,10 +65,32 @@
             flex-direction: column;
             gap: 0.8rem;
 
+            .update-quantity {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 10px;
+              // margin-bottom: 10px;
+            
+              >div {
+                display: flex;
+                gap: 10px;
+                >button {
+                  width: 20px;
+                  padding: 3px;
+                  border: 1px solid rgb(222,222,222);
+                  border-radius: 12px;
+                  font-weight: 700;
+                }
+              }
+              
+            }
+
             .quantity {
               display: flex;
               gap: 1rem;
-
+            
               >button {
                 width: 100px;
                 padding: 0.5rem;
@@ -76,8 +98,9 @@
                 border: none;
                 border-radius: 15px;
                 font-size: 15px;
+                cursor: pointer;
               }
-
+            
               >button:first-child {
                 background-color: rgb(113,224,131);
               }
@@ -85,6 +108,7 @@
                 background-color: rgb(247,70,106);
               }
             }
+
           }
         }
       }
