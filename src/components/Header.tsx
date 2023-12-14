@@ -1,3 +1,4 @@
+//@ts-nocheck
 import '../styles/header.scss';
 import {Link} from 'react-router-dom';
 import cart from '../images/shopping-cart.png';
@@ -6,15 +7,15 @@ import { useState } from 'react';
 
 
 
-function Header() {
-
+function Header({cartQuantity}) {
   const [quantity, setQuantity] = useState(0)
-
   return (
     <div className="header">
       <div>
-        <img src={logo} width="25px" />
-        <h2>React Cart</h2>
+        <Link to={"/"}>
+          <img src={logo} width="25px" />
+          <h2>React Cart</h2>
+        </Link>
       </div>
 
       <div>
@@ -23,11 +24,10 @@ function Header() {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <Link to={"/cart"}>Cart</Link>
-          </li>
-          <li onClick={() => setQuantity(quantity => quantity + 1)}>
-            <img src={cart} alt="cart" width="25px" />
-            <p>{quantity}</p>
+            <Link to={"/cart"}>Cart
+            <img src={cart} alt="cart" />
+            <p>{cartQuantity}</p>
+            </Link>
           </li>
         </ul>
       </div>

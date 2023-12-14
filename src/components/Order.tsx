@@ -29,23 +29,23 @@ function Order({ cart, cartQuantity }) {
         </div>
         <div>
           <p>Shipping & handling:</p>
-          <p>${priceShipping}</p>
+          <p>${cartQuantity ? priceShipping : '0.00'}</p>
         </div>
         <div className="order-tax">
           <p>Total before tax:</p>
-          <p>${total}</p>
+          <p>${cartQuantity ? total : '0.00'}</p>
         </div>
         <div>
           <p>Estimated tax (13%):</p>
-          <p>${totalTax}</p>
+          <p>${cartQuantity ? totalTax : '0.00'}</p>
         </div>
 
         <div className="order-total">
           <h2>Order total:</h2>
-          <h2>${orderTotal}</h2>
+          <h2>${cartQuantity ? orderTotal : '0.00'}</h2>
         </div>
 
-        <button>Place your order</button>
+        <button disabled={cartQuantity ? "" : "true"}>Place your order</button>
       </div>
     </div>
   );

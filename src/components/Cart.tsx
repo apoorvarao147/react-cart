@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import "../styles/cart.scss";
 import Order from "./Order";
+import {Link} from 'react-router-dom'
 
-function Cart({ cart, setCart }) {
-  const [cartQuantity, setCartQuantity] = useState(0)
-  const [isUpdate, setIsUpdate] = useState(false);
+function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
+  // const [cartQuantity, setCartQuantity] = useState(0)
 
   useEffect(() => {
     let qty = cart.map(product => product.quantity)
@@ -17,11 +17,6 @@ function Cart({ cart, setCart }) {
 
   const handleDelete = (id) => {
     setCart(cart.filter(product => product.id !== id));
-  };
-
-  const handleUpdate = (id) => {
-    setUpdateProduct(cart.filter(product => product.id === id))
-    setIsUpdate(true);
   };
 
   const increaseQuantity = (id) => {
@@ -45,8 +40,13 @@ function Cart({ cart, setCart }) {
       <div className="cart">
         <h4>Review your order</h4>
 
+        {/* {cartQuantity ? '' : <EmptyCart />} */}
+
         <div className="orders">
           <div className="order-items">
+
+            {cartQuantity ? '' : <EmptyCart />}
+
             {cart.map((item) => (
               <div key={item.id} className="item">
                 <img src={item.imgSrc} alt={item.name} />
@@ -64,9 +64,9 @@ function Cart({ cart, setCart }) {
                   </div>
 
                   <div className="quantity">
-                    <button onClick={() => handleUpdate(item.id)}>
-                      {isUpdate ? `Save` : `Update`}
-                    </button>
+                    {/* <button onClick={() => handleUpdate(item.id)}>
+                      Update
+                    </button> */}
                     <button onClick={() => handleDelete(item.id)}>
                       Delete
                     </button>
@@ -81,6 +81,17 @@ function Cart({ cart, setCart }) {
       </div>
     </div>
   );
+}
+
+const EmptyCart = () => {
+  return (
+    <div className="empty-cart">
+      <p>Your cart is empty.</p>
+      <Link to={"/"}>
+        <button>View products</button>
+      </Link>     
+    </div>  
+  )
 }
 
 export default Cart;

@@ -111,10 +111,30 @@
 
           }
         }
-      }
 
+        .empty-cart {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+    
+          >a {
+            >button {
+              padding: 10px 20px;
+              background-color: rgb(255,215,18);
+              box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+              border: none;
+              border-radius: 8px;
+              font-size: 15px;
+              cursor: pointer;
+              &:hover {
+                background-color:  rgb(220, 186, 16);
+              }
+            }
+          }
+        }
+      }   
+    }
 
     
-    }
   }
 }
