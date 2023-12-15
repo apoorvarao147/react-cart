@@ -25,7 +25,7 @@
     margin-bottom: 2rem;
 
     > h4 {
-      margin-bottom: 18px;
+      margin-bottom: 1rem;
       font-weight: 700;
       font-size: 22px;
     }
@@ -106,6 +106,7 @@
               }
               >button:last-child {
                 background-color: rgb(247,70,106);
+                box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
               }
             }
 
@@ -115,7 +116,8 @@
         .empty-cart {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 1rem;
+          // padding: 1rem 0;
     
           >a {
             >button {

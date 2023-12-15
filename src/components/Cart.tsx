@@ -40,8 +40,6 @@ function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
       <div className="cart">
         <h4>Review your order</h4>
 
-        {/* {cartQuantity ? '' : <EmptyCart />} */}
-
         <div className="orders">
           <div className="order-items">
 
