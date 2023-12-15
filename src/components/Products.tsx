@@ -25,7 +25,7 @@ const Products = ({
   }
 
   return (
-    <div className="productCard">
+    <div className="products">
       <div>
         <img src={imgSrc} alt={name} />
       </div>
