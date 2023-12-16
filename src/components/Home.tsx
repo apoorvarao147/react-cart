@@ -3,9 +3,11 @@ import "../styles/home.scss";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Products from "./Products";
+import toast from 'react-hot-toast'
 
 function Home({ cart, setCart, cartQuantity, setCartQuantity }) {
   const [products, setProducts] = useState<any>([]);
+  console.log(cart)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +19,7 @@ function Home({ cart, setCart, cartQuantity, setCartQuantity }) {
   }, []);
 
   const addToCartHandler = (options: any) => {
+    toast.success("Added")
     if (cart.length > 0) {
       let itemIsPresent = false;
       for (let item of cart) {
