@@ -3,12 +3,9 @@ import '../styles/header.scss';
 import {Link} from 'react-router-dom';
 import cart from '../images/shopping-cart.png';
 import logo from '../images/logo.png';
-import { useState } from 'react';
-
-
 
 function Header({cartQuantity}) {
-  const [quantity, setQuantity] = useState(0)
+
   return (
     <div className="header">
       <div>
@@ -22,6 +19,9 @@ function Header({cartQuantity}) {
         <ul>
           <li>
             <Link to={"/"}>Home</Link>
+          </li>
+          <li>
+            <Link to={"/orders"}>Orders</Link>
           </li>
           <li>
             <Link to={"/cart"}>Cart

@@ -2,7 +2,7 @@
 import "../styles/orderItems.scss";
 import toast, {Toaster} from 'react-hot-toast';
 
-function OrderItems({ cart, cartQuantity }) {
+function OrderItems({ cart,setCart, cartQuantity, setOrders }) {
   const priceShipping = 4.99;
   const priceTax = 0.13;
 
@@ -42,7 +42,8 @@ function OrderItems({ cart, cartQuantity }) {
       }
 
       sendOrder = await sendOrder.json()
-
+      setOrders(cart)
+      setCart([])
       console.log(sendOrder)
     } catch (error) {
       console.log(error)

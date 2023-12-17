@@ -2,36 +2,48 @@
 import { useEffect, useState } from "react";
 import "../styles/cart.scss";
 import OrderItems from "./OrderItems";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
+function Cart({
+  cart,
+  setCart,
+  cartQuantity,
+  setCartQuantity,
+  setOrders,
+}) {
   // const [cartQuantity, setCartQuantity] = useState(0)
 
   useEffect(() => {
-    let qty = cart.map(product => product.quantity)
+    let qty = cart.map((product) => product.quantity);
     let result = qty.reduce((acc, item) => {
-      return acc + item}, 0)
-      setCartQuantity(result)
-  },[cart])
-
+      return acc + item;
+    }, 0);
+    setCartQuantity(result);
+  }, [cart]);
 
   const handleDelete = (id) => {
-    setCart(cart.filter(product => product.id !== id));
+    setCart(cart.filter((product) => product.id !== id));
   };
 
   const increaseQuantity = (id) => {
-    setCart(cart => 
-      cart.map(product => 
-        (id === product.id && product.quantity < 5) ? {...product, quantity: product.quantity + 1} : product
-        ))
-  }
+    setCart((cart) =>
+      cart.map((product) =>
+        id === product.id && product.quantity < 5
+          ? { ...product, quantity: product.quantity + 1 }
+          : product
+      )
+    );
+  };
 
   const decreaseQuantity = (id) => {
-    setCart(cart => 
-      cart.map(product => 
-        (id === product.id && product.quantity > 1) ? {...product, quantity: product.quantity - 1} : product
-        ))
-  }
+    setCart((cart) =>
+      cart.map((product) =>
+        id === product.id && product.quantity > 1
+          ? { ...product, quantity: product.quantity - 1 }
+          : product
+      )
+    );
+  };
 
   return (
     <div id="/cart" className="cart-heading">
@@ -40,10 +52,9 @@ function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
       <div className="cart">
         <h4>Review your order</h4>
 
-        <div className="orders">
+        <div className="cart-orders">
           <div className="order-items">
-
-            {cartQuantity ? '' : <EmptyCart />}
+            {cartQuantity ? "" : <EmptyCart />} 
 
             {cart.map((item) => (
               <div key={item.id} className="item">
@@ -55,10 +66,14 @@ function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
                   <div className="update-quantity">
                     <p>Quantity: </p>
                     <div>
-                      <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                      <button onClick={() => decreaseQuantity(item.id)}>
+                        -
+                      </button>
                       <p>{item.quantity}</p>
-                      <button onClick={() => increaseQuantity(item.id)}>+</button>
-                    </div>                   
+                      <button onClick={() => increaseQuantity(item.id)}>
+                        +
+                      </button>
+                    </div>
                   </div>
 
                   <div className="quantity">
@@ -74,7 +89,12 @@ function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
             ))}
           </div>
 
-          <OrderItems cart={cart} cartQuantity={cartQuantity} />
+          <OrderItems
+            cart={cart}
+            setCart={setCart}
+            cartQuantity={cartQuantity}
+            setOrders={setOrders}
+          />
         </div>
       </div>
     </div>
@@ -87,9 +107,9 @@ const EmptyCart = () => {
       <p>Your cart is empty.</p>
       <Link to={"/"}>
         <button>View products</button>
-      </Link>     
-    </div>  
-  )
-}
+      </Link>
+    </div>
+  );
+};
 
 export default Cart;
