@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { useEffect, useState } from "react";
 import "../styles/cart.scss";
-import Order from "./Order";
+import OrderItems from "./OrderItems";
 import {Link} from 'react-router-dom'
 
 function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
@@ -74,7 +74,7 @@ function Cart({ cart, setCart, cartQuantity, setCartQuantity }) {
             ))}
           </div>
 
-          <Order cart={cart} cartQuantity={cartQuantity} />
+          <OrderItems cart={cart} cartQuantity={cartQuantity} />
         </div>
       </div>
     </div>

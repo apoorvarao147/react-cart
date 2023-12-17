@@ -1,7 +1,8 @@
 //@ts-nocheck
-import "../styles/order.scss";
+import "../styles/orderItems.scss";
+import toast, {Toaster} from 'react-hot-toast';
 
-function Order({ cart, cartQuantity }) {
+function OrderItems({ cart, cartQuantity }) {
   const priceShipping = 4.99;
   const priceTax = 0.13;
 
@@ -19,8 +20,38 @@ function Order({ cart, cartQuantity }) {
   total = total.toFixed(2);
   totalTax = totalTax.toFixed(2);
 
+
+  const handleOrder = async() => {
+    let body = {
+      "customer_id" : "customer1",
+      "box_items" : cart,
+      "amount" : orderTotal
+    }
+
+    try {
+      let sendOrder = await fetch(`${process.env.REACT_APP_BACKEND_API}/order`, {
+        method: "POST",
+        headers: {
+          "Content-type" : "application/json"
+        },
+        body: JSON.stringify(body)
+      })
+      console.log(sendOrder)
+      if (sendOrder.status === 200) {
+        toast.success("Order placed successfully")
+      }
+
+      sendOrder = await sendOrder.json()
+
+      console.log(sendOrder)
+    } catch (error) {
+      console.log(error)
+    } 
+  }
+
   return (
     <div className="order-summary">
+      <Toaster />
       <h3>Order Summary</h3>
       <div>
         <div>
@@ -45,10 +76,10 @@ function Order({ cart, cartQuantity }) {
           <h2>${cartQuantity ? orderTotal : '0.00'}</h2>
         </div>
 
-        <button disabled={cartQuantity ? "" : "true"}>Place your order</button>
+        <button disabled={cartQuantity ? "" : "true"} onClick={handleOrder}>Place your order</button>
       </div>
     </div>
   );
 }
 
-export default Order;
+export default OrderItems;
