@@ -27,14 +27,14 @@ const Products = ({
 
   return (
     <div className="products">
+      <Toaster />
       <div>
         <img src={imgSrc} alt={name} />
       </div>
       <p>{name}</p>
       <h4>${(price / 100).toFixed(2)}</h4>
-      <Toaster />
       <button
-        disabled={isProductFound ? true : ""}
+        disabled={isProductFound && true}
         onClick={() => handler({ id, name, imgSrc, price, quantity: 1 })}       
         >
         {isProductFound ? "Added" : "Add to Cart"}
