@@ -1,8 +1,18 @@
 //@ts-nocheck
 import "../styles/orderItems.scss";
 import toast, {Toaster} from 'react-hot-toast';
+import {useNavigate} from 'react-router-dom';
 
 function OrderItems({ cart,setCart, cartQuantity, setOrders }) {
+
+  const navigate = useNavigate()
+
+
+  let ordersjson = localStorage.getItem("orders");
+  ordersjson = JSON.parse(ordersjson);
+
+
+
   const priceShipping = 4.99;
   const priceTax = 0.13;
 
@@ -39,10 +49,21 @@ function OrderItems({ cart,setCart, cartQuantity, setOrders }) {
       console.log(sendOrder)
       if (sendOrder.status === 200) {
         toast.success("Order placed successfully")
+        setTimeout(() => {
+          navigate("/orders")
+        }, 1000)
       }
 
       sendOrder = await sendOrder.json()
-      setOrders(cart)
+      console.log(ordersjson)
+      console.log(cart)
+
+      if (ordersjson.length > 0) {
+        setOrders([[...cart],...ordersjson])
+      } else {
+        setOrders([[...cart]])
+      }
+      
       setCart([])
       console.log(sendOrder)
     } catch (error) {
