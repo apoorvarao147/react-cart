@@ -5,9 +5,12 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
 import Orders from "./components/Orders"
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 function App() {
+
+  // const[cart, dispatch] = useReducer(cartReducer, [])
+
   const [cart, setCart] = useState<any>([]);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [orders, setOrders] = useState([])
