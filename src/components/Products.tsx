@@ -1,6 +1,7 @@
 //@ts-nocheck
 import "../styles/products.scss";
 import {Toaster} from 'react-hot-toast';
+import AddToCartButton from "./AddToCartButton";
 
 interface ProductsProps {
   id: string;
@@ -28,18 +29,19 @@ const Products = ({
   return (
     <div className="products">
       <Toaster />
-      <div>
+      <div className="product-image">
         <img src={imgSrc} alt={name} />
       </div>
       <p>{name}</p>
       <h4>${(price / 100).toFixed(2)}</h4>
-      <button
+      {/* <button
         disabled={isProductFound && true}
         onClick={() => handler({ id, name, imgSrc, price, quantity: 1 })}       
         >
         {isProductFound ? "Added" : "Add to Cart"}
-        {/* Add to Cart */}
-      </button>
+        Add to Cart
+      </button> */}
+      <AddToCartButton />
     </div>
   );
 };

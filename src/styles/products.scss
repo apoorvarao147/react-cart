@@ -10,7 +10,7 @@
   transition: all 0.5s;
   gap: 1rem;
 
-  >div {
+  .product-image {
     width: 100%;
     height: 180px;
     display: flex;
@@ -37,6 +37,7 @@
     border: none;
     border-radius: 15px;
     cursor: pointer;
+  
     &:hover {
       background-color:  rgb(220, 186, 16);
     }

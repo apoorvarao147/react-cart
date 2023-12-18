@@ -1,5 +1,7 @@
 //@ts-nocheck
+import {Link} from 'react-router-dom'
 import "../styles/orders.scss"
+
 
 const Orders = ({orders}) => {
 
@@ -7,7 +9,16 @@ const Orders = ({orders}) => {
     <div className="orders">
       <div>
         <h2>Your Orders</h2>
-        <p>{orders.length > 0 ? "" : "Looks like you haven't placed an order."}</p>
+        {
+        orders.length > 0 ? "" : 
+        <>
+          <p>Looks like you haven't placed an order.</p>
+          <Link to={"/"}><button>View products</button></Link>
+        </>
+        }
+
+
+        
 
         <>         
             {
