@@ -47,7 +47,7 @@ function Home({ cart, setCart, cartQuantity, setCartQuantity }) {
             name={product.productName}
             imgSrc={product.url}
             price={product.price}
-            handler={addToCartHandler}
+            addToCartHandler={addToCartHandler}
             cart={cart}
           />
         ))}
