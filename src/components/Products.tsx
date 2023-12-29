@@ -1,6 +1,6 @@
 //@ts-nocheck
 import "../styles/products.scss";
-import {Toaster} from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import AddToCartButton from "./AddToCartButton";
 
 interface ProductsProps {
@@ -9,14 +9,14 @@ interface ProductsProps {
   imgSrc: string;
   price: number;
   handler: any;
-};
+}
 
 const Products = ({
   id,
   name,
   imgSrc,
   price,
-  handler,
+  addToCartHandler,
   cart,
 }: ProductsProps) => {
   let isProductFound = false;
@@ -41,7 +41,14 @@ const Products = ({
         {isProductFound ? "Added" : "Add to Cart"}
         Add to Cart
       </button> */}
-      <AddToCartButton />
+      <AddToCartButton
+        id={id}
+        name={name}
+        imgSrc={imgSrc}
+        price={price}
+        addToCartHandler={addToCartHandler}
+        cart={cart}
+      />
     </div>
   );
 };

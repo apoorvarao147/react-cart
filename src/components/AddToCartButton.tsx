@@ -2,15 +2,28 @@
 import { useState } from "react";
 import "../styles/addToCartButton.scss";
 
-const AddToCartButton = () => {
+const AddToCartButton = ({id,
+  name,
+  imgSrc,
+  price,
+  addToCartHandler,
+  cart,}) => {
   const [isClicked, setIsClicked] = useState(false);
+  console.log(isClicked)
 
   return (
     <>
       {isClicked ? (
         <HandleQuantity setIsClicked={setIsClicked} />
       ) : (
-        <AddToCart setIsClicked={setIsClicked} />
+        <AddToCart setIsClicked={setIsClicked}
+        id={id}
+        name={name}
+        imgSrc={imgSrc}
+        price={price}
+        addToCartHandler={addToCartHandler}
+        cart={cart} 
+         />
       )}
     </>
   );
@@ -41,13 +54,21 @@ const HandleQuantity = ({ setIsClicked }) => {
   );
 };
 
-const AddToCart = ({setIsClicked}) => {
-  // const handleClick = () => {
-  //   setIsClicked(true)
-  // }
+const AddToCart = ({setIsClicked, id,
+  name,
+  imgSrc,
+  price,
+  addToCartHandler,
+  cart}) => {
+  const handleClick = () => {
+    setIsClicked(true)
+    addToCartHandler({ id, name, imgSrc, price, quantity: 1 })
+  }
+
+
   return (
     <>
-      <button onClick={() => setIsClicked(true)}>Add to Cart</button>
+      <button onClick={handleClick}>Add to Cart</button>
     </>
   );
 };
