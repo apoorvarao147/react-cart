@@ -54,7 +54,7 @@ function Home({ cart, setCart, cartQuantity, setCartQuantity }) {
       </div>
       <div className="checkout">
         <Link to={"/cart"}>
-          <button>Go to Checkout</button>
+          <button disabled={!cart.length > 0}>Go to Checkout</button>
         </Link>
       </div>
     </>
