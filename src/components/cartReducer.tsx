@@ -1,38 +1,38 @@
 //@ts-nocheck
-export const cartReducer = (state, action) => {
+export const cartReducer = (cart, action) => {
   if (action.type === "ADD") {
-    const newCartItems = [...state.cartItems];
+    const newCartItems = [...cart.cartItems];
     const itemIndex = newCartItems.findIndex(
       (cartItem) => cartItem.product.id === action.payload.product.id
     );
     if (itemIndex > -1) {
-      return { ...state };
+      return { ...cart };
     }
     newCartItems.push({ ...action.payload });
-    return { ...state, cartItems: newCartItems };
+    return { ...cart, cartItems: newCartItems };
   }
 
   if (action.type === "INCREMENT") {
-    const newCartItems = [...state.cartItems];
+    const newCartItems = [...cart.cartItems];
     const itemIndex = newCartItems.findIndex(
       (cartItem) => cartItem.product.id === action.payload
     );
     if (itemIndex === -1) {
-      return { ...state };
+      return { ...cart };
     }
     const newItem = { ...newCartItems[itemIndex] };
     newItem.quantity++;
     newCartItems[itemIndex] = newItem;
-    return { ...state, cartItems: newCartItems };
+    return { ...cart, cartItems: newCartItems };
   }
 
   if (action.type === "DECREMENT") {
-    const newCartItems = [...state.cartItems];
+    const newCartItems = [...cart.cartItems];
     const itemIndex = newCartItems.findIndex(
       (cartItem) => cartItem.product.id === action.payload
     );
     if (itemIndex === -1) {
-      return { ...state };
+      return { ...cart };
     }
     const newItem = { ...newCartItems[itemIndex] };
     newItem.quantity--;
@@ -40,18 +40,26 @@ export const cartReducer = (state, action) => {
     if (newCartItems[itemIndex].quantity === 0) {
       newCartItems.splice(itemIndex, 1);
     }
-    return { ...state, cartItems: newCartItems };
+    return { ...cart, cartItems: newCartItems };
   }
 
   if (action.type === "DELETE") {
-    const newCartItems = [...state.cartItems];
+    const newCartItems = [...cart.cartItems];
     const itemIndex = newCartItems.findIndex(
       (cartItem) => cartItem.product.id === action.payload
     );
     if (itemIndex === -1) {
-      return { ...state }
+      return { ...cart };
     }
-    newCartItems.splice(itemIndex, 1)
-    return { ...state, cartItems: newCartItems }
+    newCartItems.splice(itemIndex, 1);
+    return { ...cart, cartItems: newCartItems };
+  }
+
+  if(action.type === "EMPTYCART") {
+    return { ...cart, cartItems: [] }
+  }
+
+  if(action.type === "SAVEDCART") {
+    return {...action.payload}
   }
 };

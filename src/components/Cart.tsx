@@ -1,86 +1,63 @@
 //@ts-nocheck
-import { useEffect, useState } from "react";
 import "../styles/cart.scss";
 import OrderItems from "./OrderItems";
 import { Link } from "react-router-dom";
 
-function Cart({
+const Cart = ({
   cart,
-  setCart,
-  cartQuantity,
-  setCartQuantity,
   setOrders,
-}) {
-  // const [cartQuantity, setCartQuantity] = useState(0)
+  dispatch
+}) => {
 
-  useEffect(() => {
-    let qty = cart.map((product) => product.quantity);
-    let result = qty.reduce((acc, item) => {
-      return acc + item;
-    }, 0);
-    setCartQuantity(result);
-  }, [cart]);
+  const quantityArray = [];
+  cart.cartItems.map((item) => quantityArray.push(item.quantity));
+  const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
+
 
   const handleDelete = (id) => {
-    setCart(cart.filter((product) => product.id !== id));
+    dispatch({type: "DELETE", payload: id})
   };
 
   const increaseQuantity = (id) => {
-    setCart((cart) =>
-      cart.map((product) =>
-        id === product.id && product.quantity < 5
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
-      )
-    );
+    dispatch({type: "INCREMENT", payload: id})
   };
 
   const decreaseQuantity = (id) => {
-    setCart((cart) =>
-      cart.map((product) =>
-        id === product.id && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      )
-    );
+    dispatch({type: "DECREMENT", payload: id})
   };
 
   return (
     <div id="/cart" className="cart-heading">
-      <h2>Shopping Cart ({cartQuantity} items)</h2>
+      <h2>Shopping Cart ({quantityInCart} items)</h2>
 
       <div className="cart">
         <h4>Review your order</h4>
-
         <div className="cart-orders">
           <div className="order-items">
-            {cartQuantity ? "" : <EmptyCart />} 
+            {cart.cartItems.length > 0 ? "" : <EmptyCart /> } 
 
-            {cart.map((item) => (
+            {cart.cartItems.map((item) => (
               <div key={item.id} className="item">
-                <img src={item.imgSrc} alt={item.name} />
+                <img src={item.product.url} alt={item.product.productName} />
                 <div className="item-right">
-                  <h3>{item.name}</h3>
-                  <h4>${(item.price / 100).toFixed(2)}</h4>
+                  <h3>{item.product.productName}</h3>
+                  <h4>${(item.product.price / 100).toFixed(2)}</h4>
 
                   <div className="update-quantity">
                     <p>Quantity: </p>
                     <div>
-                      <button onClick={() => decreaseQuantity(item.id)}>
+                      <button onClick={() => decreaseQuantity(item.product.id)}>
                         -
                       </button>
                       <p>{item.quantity}</p>
-                      <button onClick={() => increaseQuantity(item.id)}>
+                      <button onClick={() => increaseQuantity(item.product.id)}>
                         +
                       </button>
                     </div>
                   </div>
 
                   <div className="quantity">
-                    {/* <button onClick={() => handleUpdate(item.id)}>
-                      Update
-                    </button> */}
-                    <button onClick={() => handleDelete(item.id)}>
+                    <button onClick={() => handleDelete(item.product.id)}>
                       Delete
                     </button>
                   </div>
@@ -91,9 +68,8 @@ function Cart({
 
           <OrderItems
             cart={cart}
-            setCart={setCart}
-            cartQuantity={cartQuantity}
             setOrders={setOrders}
+            dispatch={dispatch}
           />
         </div>
       </div>
