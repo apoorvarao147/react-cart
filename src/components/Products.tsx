@@ -1,56 +1,47 @@
 //@ts-nocheck
 import "../styles/products.scss";
-import { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 
-interface ProductsProps {
-  id: string;
-  name: string;
-  imgSrc: string;
-  price: number;
-  handler: any;
-}
+function Products({ cart, dispatch }) {
+  const [products, setProducts] = useState<any>([]);
 
-const Products = ({
-  id,
-  name,
-  imgSrc,
-  price,
-  addToCartHandler,
-  cart,
-}: ProductsProps) => {
-  let isProductFound = false;
-  for (let item of cart) {
-    if (item.id === id) {
-      isProductFound = true;
-    }
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await fetch(`${process.env.REACT_APP_BACKEND_API}/product`);
+      data = await data.json();
+      setProducts(data);
+    };
+    fetchData();
+  }, []);
 
   return (
-    <div className="products">
-      <Toaster />
-      <div className="product-image">
-        <img src={imgSrc} alt={name} />
+    <>
+      <div className="products-main">
+        {products.map((product) => (
+          <div key={product.id} className="products">
+            <div className="product-image">
+              <img src={product.url} alt={product.productName} />
+            </div>
+            <p>{product.productName}</p>
+            <h4>${(product.price / 100).toFixed(2)}</h4>
+            <AddToCartButton
+              id={product.id}
+              product={product}
+              cart={cart}
+              dispatch={dispatch}
+            />
+          </div>
+        ))}
       </div>
-      <p>{name}</p>
-      <h4>${(price / 100).toFixed(2)}</h4>
-      {/* <button
-        disabled={isProductFound && true}
-        onClick={() => handler({ id, name, imgSrc, price, quantity: 1 })}       
-        >
-        {isProductFound ? "Added" : "Add to Cart"}
-        Add to Cart
-      </button> */}
-      <AddToCartButton
-        id={id}
-        name={name}
-        imgSrc={imgSrc}
-        price={price}
-        addToCartHandler={addToCartHandler}
-        cart={cart}
-      />
-    </div>
+      <div className="checkout">
+        <Link to={"/cart"}>
+          <button disabled={!cart.cartItems.length > 0}>Go to Checkout</button>
+        </Link>
+      </div>
+    </>
   );
-};
+}
 
 export default Products;

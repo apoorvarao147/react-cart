@@ -16,37 +16,33 @@ const Orders = ({orders}) => {
           <Link to={"/"}><button>View products</button></Link>
         </>
         }
-
-
-        
-
         <>         
-            {
-              orders.map((order,index) => {
-                return (
-                     <div className="order">
-                      <div key={index} className="order-title">
-                          <p>Order Placed</p>
-                      </div>                               
-                    {
+          {
+            orders.map((order,index) => {
+              return (
+                <div key={index} className="order">
+                  <div className="order-title">
+                      <p>Order Placed</p>
+                  </div>                               
+                  {
                     order.map(item => {
                       return (
                         <>
-                          <div key={item.id} className="ordered-items">
-                            <img src={item.imgSrc} alt={item.name} />
+                          <div key={item.product.id} className="ordered-items">
+                            <img src={item.product.url} alt={item.product.productName} />
                             <div>
-                              <h3>{item.name}</h3>
-                              <p>Price: ${(item.price / 100).toFixed(2)}</p>
+                              <h3>{item.product.productName}</h3>
+                              <p>Price: ${(item.product.price / 100).toFixed(2)}</p>
                               <p>Quantity: {item.quantity}</p>
                             </div>
                           </div>
-                          </>
+                        </>
                       )
                     })}
-                  </div> 
-                )
-              })
-            }
+                </div> 
+              )
+            })
+          }
 
 
 

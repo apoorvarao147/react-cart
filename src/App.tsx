@@ -2,33 +2,31 @@
 import "./styles/app.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Products from "./components/Products";
 import Cart from "./components/Cart";
-import Orders from "./components/Orders"
+import Orders from "./components/Orders";
 import { useEffect, useReducer, useState } from "react";
+import { cartReducer } from "./components/cartReducer";
 
-function App() {
+const initialState = {
+  cartItems: [],
+};
 
-  // const[cart, dispatch] = useReducer(cartReducer, [])
+const App = () => {
+  const [cart, dispatch] = useReducer(cartReducer, initialState);
+  const [orders, setOrders] = useState([]);
 
-  const [cart, setCart] = useState<any>([]);
-  const [cartQuantity, setCartQuantity] = useState(0);
-  const [orders, setOrders] = useState([])
-
+  console.log(cart)
 
   useEffect(() => {
     let json = localStorage.getItem("cart");
     const savedCart = JSON.parse(json);
 
-    let qtyjson = localStorage.getItem("quantity");
-    qtyjson = JSON.parse(qtyjson);
-
     let ordersjson = localStorage.getItem("orders");
     ordersjson = JSON.parse(ordersjson);
 
     if (savedCart) {
-      setCart(savedCart);
-      setCartQuantity(qtyjson);
+      dispatch({type: "SAVEDCART", payload: savedCart})
       setOrders(ordersjson);
     }
   }, []);
@@ -37,28 +35,23 @@ function App() {
     const json = JSON.stringify(cart);
     localStorage.setItem("cart", json);
 
-    const qtyjson = JSON.stringify(cartQuantity);
-    localStorage.setItem("quantity", qtyjson);
-
     const ordersjson = JSON.stringify(orders);
     localStorage.setItem("orders", ordersjson);
-
-  }, [cart, cartQuantity, orders]);
-
+  }, [cart, orders]);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header cartQuantity={cartQuantity} />
+        <Header
+          cart={cart}
+        />
         <Routes>
           <Route
             path="/"
             element={
-              <Home
+              <Products
                 cart={cart}
-                setCart={setCart}
-                cartQuantity={cartQuantity}
-                setCartQuantity={setCartQuantity}
+                dispatch={dispatch}
               />
             }
           />
@@ -67,18 +60,16 @@ function App() {
             element={
               <Cart
                 cart={cart}
-                setCart={setCart}
-                cartQuantity={cartQuantity}
-                setCartQuantity={setCartQuantity}
                 setOrders={setOrders}
+                dispatch={dispatch}
               />
             }
           />
           <Route path="/orders" element={<Orders orders={orders} />} />
-        </Routes>        
+        </Routes>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
