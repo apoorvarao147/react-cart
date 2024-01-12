@@ -4,6 +4,9 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   padding: 3rem 5.75rem;
+  margin-left: auto;
+  margin-right: auto;
+
   .products {
     background-color: white;
     width: 300px;
@@ -72,9 +75,23 @@
     }
 
     .not-allowed {
-      cursor: none;
+      cursor: not-allowed;
       opacity: 0;
       background-color: rgb(17, 155, 17);
     }
   }
 }
+
+
+@media screen and (max-width: 1510px) {
+  .products-main {
+    max-width: 1220px;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .products-main {
+    max-width: 900px;
+  }
+}
+
