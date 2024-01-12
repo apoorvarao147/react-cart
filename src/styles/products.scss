@@ -70,5 +70,11 @@
       cursor: pointer;
       background-color: green;
     }
+
+    .not-allowed {
+      cursor: none;
+      opacity: 0;
+      background-color: rgb(17, 155, 17);
+    }
   }
 }
