@@ -32,6 +32,10 @@
       }
     }
 
+    .not-allowed {
+      cursor: not-allowed;
+    }
+
     >div {
       display: flex;
       flex-direction: row;

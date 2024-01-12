@@ -37,7 +37,12 @@ function Products({ cart, dispatch }) {
       </div>
       <div className="checkout">
         <Link to={"/cart"}>
-          <button disabled={!cart.cartItems.length > 0}>Go to Checkout</button>
+          <button
+            className={cart.cartItems.length > 0 ? "" : "not-allowed"}
+            disabled={!cart.cartItems.length > 0}
+          >
+            Go to Checkout
+          </button>
         </Link>
       </div>
     </>
