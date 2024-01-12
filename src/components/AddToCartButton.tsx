@@ -1,84 +1,60 @@
 //@ts-nocheck
-import { useState, useEffect } from "react";
 import "../styles/addToCartButton.scss";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddToCartButton = ({ id, product, cart, dispatch }) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [productQuantity, setProductQuantity] = useState();
-  console.log(cart)
-
-  // useEffect(() => {
-  //   let clickjson = localStorage.getItem("isClicked");
-  //   clickjson = JSON.parse(clickjson);
-  //   console.log(isClicked)
-  //   setIsClicked(clickjson)
-  // }, []);
-
-  useEffect(() => {
-    const clickjson = JSON.stringify(isClicked);
-    localStorage.setItem("isClicked", clickjson);
-    console.log(clickjson)
-  }, [isClicked]);
+  const isInCart = (cartItems, product) => {
+    return cartItems.some((cartItem) => cartItem.product.id === product.id);
+  };
 
   return (
     <>
-      {isClicked ? (
+      {isInCart(cart.cartItems, product) ? (
         <HandleQuantity
-          setIsClicked={setIsClicked}
+          id={id}
           dispatch={dispatch}
-          id={id}
-          cart={cart}
-          productQuantity={productQuantity}
-          setProductQuantity={setProductQuantity}
-        />
-      ) : (
-        <AddToCart
-          setIsClicked={setIsClicked}
-          id={id}
           product={product}
           cart={cart}
-          dispatch={dispatch}
-          setProductQuantity={setProductQuantity}
         />
+      ) : (
+        <AddToCart product={product} dispatch={dispatch} />
       )}
     </>
   );
 };
 
-const HandleQuantity = ({ setIsClicked, dispatch, id, productQuantity, setProductQuantity, cart }) => {
-  const [qty, setQty] = useState(1);
+const HandleQuantity = ({ id, dispatch, product, cart }) => {
+  const inCartQuantity = (cartItems, product) => {
+    console.log(cartItems);
+    const itemQuantity = cartItems.find(
+      (cartItem) => cartItem.product.id === product.id
+    );
+    return itemQuantity.quantity;
+  };
 
   const handleDecrease = (id) => {
-    if (qty > 1) {
-      setQty((prev) => prev - 1);
-      dispatch({ type: "DECREMENT", payload: id });
-      setProductQuantity(prev => prev - 1)
-    }
-    if (qty === 1) {
-      setIsClicked(false);
-      dispatch({ type: "DELETE", payload: id });
-    }
+    dispatch({ type: "DECREMENT", payload: id });
   };
+
   const handleIncrease = (id) => {
-    if (qty < 5) {
-      setQty((prev) => prev + 1);
-      dispatch({ type: "INCREMENT", payload: id });
-      setProductQuantity(prev => prev + 1)
-    }
+    dispatch({ type: "INCREMENT", payload: id });
   };
+
   return (
     <div className="handle-quantity">
       <button onClick={() => handleDecrease(id)}>−</button>
-      <span>{qty}</span>
+      {inCartQuantity(cart.cartItems, product) > 0 ? (
+        <span>{inCartQuantity(cart.cartItems, product)}</span>
+      ) : (
+        ""
+      )}
       <button onClick={() => handleIncrease(id)}>+</button>
     </div>
   );
 };
 
-const AddToCart = ({ setIsClicked, dispatch, product, setProductQuantity }) => {
+const AddToCart = ({ product, dispatch }) => {
   const handleAdd = () => {
-    setIsClicked(true);
     toast.success("Added");
     dispatch({
       type: "ADD",
@@ -87,7 +63,6 @@ const AddToCart = ({ setIsClicked, dispatch, product, setProductQuantity }) => {
         quantity: 1,
       },
     });
-    setProductQuantity(1);
   };
   return (
     <>
