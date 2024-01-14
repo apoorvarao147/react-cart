@@ -75,10 +75,8 @@
       background-color: green;
     }
 
-    .not-allowed {
-      cursor: not-allowed;
-      opacity: 0;
-      background-color: rgb(17, 155, 17);
+    .not-visible {
+      display: none;
     }
   }
 }
