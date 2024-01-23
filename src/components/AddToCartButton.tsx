@@ -25,7 +25,6 @@ const AddToCartButton = ({ id, product, cart, dispatch }) => {
 
 const HandleQuantity = ({ id, dispatch, product, cart }) => {
   const inCartQuantity = (cartItems, product) => {
-    console.log(cartItems);
     const itemQuantity = cartItems.find(
       (cartItem) => cartItem.product.id === product.id
     );

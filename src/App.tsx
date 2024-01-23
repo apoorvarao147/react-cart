@@ -16,8 +16,6 @@ const App = () => {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
   const [orders, setOrders] = useState([]);
 
-  console.log(cart)
-
   useEffect(() => {
     let json = localStorage.getItem("cart");
     const savedCart = JSON.parse(json);

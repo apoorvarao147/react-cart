@@ -1,16 +1,27 @@
 //@ts-nocheck
 import "../styles/products.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch } from "react";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 
-function Products({ cart, dispatch }) {
-  const [products, setProducts] = useState<any>([]);
+type Product = {
+  id: string;
+  productName: string;
+  url: string;
+  price: number;
+}
+
+type ProductsProps = {
+
+}
+
+const Products = ({ cart, dispatch }) => {
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await fetch(`${process.env.REACT_APP_BACKEND_API}/product`);
-      data = await data.json();
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_API}/product`);
+      const data = await response.json() as Product[];
       setProducts(data);
     };
     fetchData();
@@ -39,7 +50,6 @@ function Products({ cart, dispatch }) {
         <Link to={"/cart"}>
           <button
             className={cart.cartItems.length > 0 ? "" : "not-visible"}
-            disabled={!cart.cartItems.length > 0}
           >
             Go to Checkout
           </button>
