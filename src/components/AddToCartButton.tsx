@@ -1,8 +1,12 @@
 //@ts-nocheck
 import "../styles/addToCartButton.scss";
+import { useContext } from "react";
+import {CartContext} from "./context/cartContext"
 import toast, { Toaster } from "react-hot-toast";
 
-const AddToCartButton = ({ id, product, cart, dispatch }) => {
+const AddToCartButton = ({ id, product }) => {
+  const {cart, dispatch} = useContext(CartContext)
+  
   const isInCart = (cartItems, product) => {
     return cartItems.some((cartItem) => cartItem.product.id === product.id);
   };
@@ -25,7 +29,6 @@ const AddToCartButton = ({ id, product, cart, dispatch }) => {
 
 const HandleQuantity = ({ id, dispatch, product, cart }) => {
   const inCartQuantity = (cartItems, product) => {
-    console.log(cartItems);
     const itemQuantity = cartItems.find(
       (cartItem) => cartItem.product.id === product.id
     );

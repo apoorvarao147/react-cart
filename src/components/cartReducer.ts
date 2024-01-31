@@ -1,5 +1,17 @@
-//@ts-nocheck
-export const cartReducer = (cart, action) => {
+import {CartItems, Product, } from "./types"
+
+export type CartState = {
+  cartItems: CartItems;
+}
+
+export type CartAction = | {type: "ADD"; payload: {product: Product; quantity: number}} 
+            | {type: "INCREMENT"; payload: string}
+            | {type: "DECREMENT"; payload: string} 
+            | {type: "DELETE"; payload: string} 
+            | {type: "EMPTYCART"} 
+            | {type: "SAVEDCART"; payload: any}
+
+export const cartReducer = (cart: CartState, action: CartAction) => {
   if (action.type === "ADD") {
     const newCartItems = [...cart.cartItems];
     const itemIndex = newCartItems.findIndex(

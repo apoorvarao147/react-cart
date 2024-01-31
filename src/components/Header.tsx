@@ -1,14 +1,12 @@
-//@ts-nocheck
 import "../styles/header.scss";
 import { Link } from "react-router-dom";
 import cartImage from "../images/shopping-cart.png";
 import logo from "../images/logo.png";
-import { useState } from "react";
+import {Cart} from "./types"
 
-function Header({ cart }) {
-
-  const quantityArray = [];
-  cart.cartItems.map((item) => quantityArray.push(item.quantity));
+const Header = ({ cart }: {cart: Cart}) => {
+  const quantityArray: Array<number> = [];
+  cart?.cartItems?.map((item) => quantityArray.push(item.quantity));
   const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
 
 
@@ -16,7 +14,7 @@ function Header({ cart }) {
     <div className="header">
       <div>
         <Link to={"/"}>
-          <img src={logo} width="25px" />
+          <img src={logo} width="25px" alt="logo" />
           <h2>React Cart</h2>
         </Link>
       </div>

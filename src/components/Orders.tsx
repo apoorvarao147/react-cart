@@ -4,7 +4,6 @@ import "../styles/orders.scss"
 
 
 const Orders = ({orders}) => {
-
   return (
     <div className="orders">
       <div>
@@ -16,10 +15,9 @@ const Orders = ({orders}) => {
           <Link to={"/"}><button>View products</button></Link>
         </>
         }
-        <>         
+       
           {
-            orders.map((order,index) => {
-              return (
+            orders.map((order, index) => (
                 <div key={index} className="order">
                   <div className="order-title">
                       <p>Order Placed</p>
@@ -41,27 +39,9 @@ const Orders = ({orders}) => {
                     })}
                 </div> 
               )
-            })
+            )
           }
-
-
-
-
-
-
-            {/* {
-              orders.map(item => (
-                <div key={item.id} className="ordered-items">
-                  <img src={item.imgSrc} alt={item.name} />
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>Price: ${(item.price / 100).toFixed(2)}</p>
-                    <p>Quantity: {item.quantity}</p>
-                  </div>
-                </div>                 
-              ))
-            } */}
-        </>  
+ 
 
       </div>
     </div>
