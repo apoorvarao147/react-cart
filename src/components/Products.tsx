@@ -1,21 +1,13 @@
 //@ts-nocheck
 import "../styles/products.scss";
-import { useState, useEffect, Dispatch } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
+import {CartContext} from "./context/cartContext"
 
-type Product = {
-  id: string;
-  productName: string;
-  url: string;
-  price: number;
-}
+const Products = () => {
+  const {cart, dispatch} = useContext(CartContext)
 
-type ProductsProps = {
-
-}
-
-const Products = ({ cart, dispatch }) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -40,8 +32,6 @@ const Products = ({ cart, dispatch }) => {
             <AddToCartButton
               id={product.id}
               product={product}
-              cart={cart}
-              dispatch={dispatch}
             />
           </div>
         ))}

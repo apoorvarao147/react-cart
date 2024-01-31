@@ -5,8 +5,9 @@ import Header from "./components/Header";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Orders from "./components/Orders";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import { cartReducer } from "./components/cartReducer";
+import { CartContext } from "./components/context/cartContext";
 
 const initialState = {
   cartItems: [],
@@ -39,33 +40,20 @@ const App = () => {
 
   return (
     <div className="App">
+      <CartContext.Provider value={{cart, dispatch}}>
       <BrowserRouter>
-        <Header
-          cart={cart}
-        />
+        <Header cart={cart}/>
         <Routes>
           <Route
             path="/"
-            element={
-              <Products
-                cart={cart}
-                dispatch={dispatch}
-              />
-            }
-          />
+            element={<Products/>}/>
+          <Route path="/orders" element={<Orders orders={orders} />} />
           <Route
             path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                setOrders={setOrders}
-                dispatch={dispatch}
-              />
-            }
-          />
-          <Route path="/orders" element={<Orders orders={orders} />} />
+            element={<Cart setOrders={setOrders}/>}/>
         </Routes>
       </BrowserRouter>
+      </CartContext.Provider>
     </div>
   );
 };

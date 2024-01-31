@@ -1,28 +1,27 @@
 //@ts-nocheck
 import "../styles/cart.scss";
+import { useContext } from "react";
 import OrderItems from "./OrderItems";
 import { Link } from "react-router-dom";
+import {CartContext} from "./context/cartContext"
 
-const Cart = ({
-  cart,
-  setOrders,
-  dispatch
-}) => {
+const Cart = ({setOrders}) => {
+  const {cart, dispatch} = useContext(CartContext)
 
   const quantityArray = [];
   cart.cartItems.map((item) => quantityArray.push(item.quantity));
   const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
 
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     dispatch({type: "DELETE", payload: id})
   };
 
-  const increaseQuantity = (id) => {
+  const increaseQuantity = (id: string) => {
     dispatch({type: "INCREMENT", payload: id})
   };
 
-  const decreaseQuantity = (id) => {
+  const decreaseQuantity = (id: string) => {
     dispatch({type: "DECREMENT", payload: id})
   };
 
@@ -66,11 +65,7 @@ const Cart = ({
             ))}
           </div>
 
-          <OrderItems
-            cart={cart}
-            setOrders={setOrders}
-            dispatch={dispatch}
-          />
+          <OrderItems setOrders={setOrders}/>
         </div>
       </div>
     </div>

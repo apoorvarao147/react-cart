@@ -1,10 +1,13 @@
 //@ts-nocheck
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "../styles/orderItems.scss";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import {CartContext} from "./context/cartContext"
 
-const OrderItems = ({ cart, setOrders, dispatch }) => {
+const OrderItems = ({setOrders}) => { 
+  const {cart, dispatch} = useContext(CartContext)
+
   const priceShipping = 4.99;
   const priceTax = 0.13;
 
