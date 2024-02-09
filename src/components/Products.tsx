@@ -1,9 +1,9 @@
-//@ts-nocheck
 import "../styles/products.scss";
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 import {CartContext} from "./context/cartContext"
+import { Product } from "./types";
 
 const Products = () => {
   const {cart, dispatch} = useContext(CartContext)

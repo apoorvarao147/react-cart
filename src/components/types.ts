@@ -11,6 +11,10 @@ export type CartItems = {
   quantity: number;
 }[];
 
-export type Cart = {
+export type CartType = {
   cartItems: CartItems;
+}
+
+export type OrdersType = {
+  cartItems : CartItems[]
 }

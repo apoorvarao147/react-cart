@@ -1,13 +1,21 @@
-//@ts-nocheck
 import "../styles/addToCartButton.scss";
 import { useContext } from "react";
 import {CartContext} from "./context/cartContext"
 import toast, { Toaster } from "react-hot-toast";
+import { Product, CartItems, CartType } from "./types";
 
-const AddToCartButton = ({ id, product }) => {
+type HandleQuantityProps ={
+  id: string;
+  dispatch: any;
+  product: Product;
+  cart: CartType
+
+}
+
+const AddToCartButton = ({ id, product }: {id: string, product: Product}) => {
   const {cart, dispatch} = useContext(CartContext)
   
-  const isInCart = (cartItems, product) => {
+  const isInCart = (cartItems: CartItems, product: Product) => {
     return cartItems.some((cartItem) => cartItem.product.id === product.id);
   };
 
@@ -27,19 +35,19 @@ const AddToCartButton = ({ id, product }) => {
   );
 };
 
-const HandleQuantity = ({ id, dispatch, product, cart }) => {
-  const inCartQuantity = (cartItems, product) => {
-    const itemQuantity = cartItems.find(
+const HandleQuantity = ({ id, dispatch, product, cart }: HandleQuantityProps) => {
+  const inCartQuantity = (cartItems: CartItems, product: Product) => {
+    const itemQuantity: any = cartItems.find(
       (cartItem) => cartItem.product.id === product.id
     );
     return itemQuantity.quantity;
   };
 
-  const handleDecrease = (id) => {
+  const handleDecrease = (id: string) => {
     dispatch({ type: "DECREMENT", payload: id });
   };
 
-  const handleIncrease = (id) => {
+  const handleIncrease = (id: string) => {
     dispatch({ type: "INCREMENT", payload: id });
   };
 
@@ -56,8 +64,8 @@ const HandleQuantity = ({ id, dispatch, product, cart }) => {
   );
 };
 
-const AddToCart = ({ product, dispatch }) => {
-  const handleAdd = () => {
+const AddToCart = ({ product, dispatch }: {product: Product; dispatch: any}) => {
+  const handleAdd = (product: Product) => {
     toast.success("Added");
     dispatch({
       type: "ADD",

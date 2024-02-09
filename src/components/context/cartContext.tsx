@@ -1,4 +1,4 @@
 import {createContext} from "react"
-import { Cart } from "../types"
+import { CartType } from "../types"
 
-export const CartContext = createContext<{cart: Cart; dispatch: any}>({} as {cart: Cart, dispatch: any})
+export const CartContext = createContext<{cart: CartType; dispatch: any}>({} as {cart: CartType, dispatch: any})

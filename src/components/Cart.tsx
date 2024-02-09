@@ -1,14 +1,17 @@
-//@ts-nocheck
 import "../styles/cart.scss";
 import { useContext } from "react";
 import OrderItems from "./OrderItems";
 import { Link } from "react-router-dom";
 import {CartContext} from "./context/cartContext"
 
-const Cart = ({setOrders}) => {
+type CartProps ={
+  setOrders: React.Dispatch<React.SetStateAction<any>>
+}
+
+const Cart = ({setOrders}: CartProps) => {
   const {cart, dispatch} = useContext(CartContext)
 
-  const quantityArray = [];
+  const quantityArray: any[] = [];
   cart.cartItems.map((item) => quantityArray.push(item.quantity));
   const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
 
@@ -36,7 +39,7 @@ const Cart = ({setOrders}) => {
             {cart.cartItems.length > 0 ? "" : <EmptyCart /> } 
 
             {cart.cartItems.map((item) => (
-              <div key={item.id} className="item">
+              <div key={item.product.id} className="item">
                 <img src={item.product.url} alt={item.product.productName} />
                 <div className="item-right">
                   <h3>{item.product.productName}</h3>

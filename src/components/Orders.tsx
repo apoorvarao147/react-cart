@@ -1,6 +1,7 @@
 //@ts-nocheck
 import {Link} from 'react-router-dom'
 import "../styles/orders.scss"
+import { OrdersType } from './types'
 
 
 const Orders = ({orders}) => {
@@ -41,8 +42,6 @@ const Orders = ({orders}) => {
               )
             )
           }
- 
-
       </div>
     </div>
   )

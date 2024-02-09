@@ -1,11 +1,14 @@
-//@ts-nocheck
 import { useEffect, useState, useContext } from "react";
 import "../styles/orderItems.scss";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {CartContext} from "./context/cartContext"
 
-const OrderItems = ({setOrders}) => { 
+type OrderItemsProps ={
+  setOrders: React.Dispatch<React.SetStateAction<any>>
+}
+
+const OrderItems = ({setOrders}: OrderItemsProps) => { 
   const {cart, dispatch} = useContext(CartContext)
 
   const priceShipping = 4.99;
@@ -13,22 +16,22 @@ const OrderItems = ({setOrders}) => {
 
   const navigate = useNavigate();
 
-  const [quantityInCart, setQuantityInCart] = useState(0)
-  const [sum, setSum] = useState(0)
-  const [total, setTotal] = useState(0)
-  const [totalTax, setTotaltax] = useState(0)
-  const [orderTotal, setOrderTotal] = useState(0)
+  const [quantityInCart, setQuantityInCart] = useState("")
+  const [sum, setSum] = useState("")
+  const [total, setTotal] = useState("")
+  const [totalTax, setTotaltax] = useState("")
+  const [orderTotal, setOrderTotal] = useState("")
 
   useEffect(() => {
-    let sum = 0;
+    let sum: number | string  = 0;
     for (let item of cart.cartItems) {
       let price = Number((item.product.price / 100).toFixed(2));
       sum = sum + price * item.quantity;
     }
   
-    let total = sum + priceShipping;
-    let totalTax = total * priceTax;
-    let orderTotal = total + totalTax;
+    let total: number | string = sum + priceShipping;
+    let totalTax: number | string  = total * priceTax;
+    let orderTotal: number | string  = total + totalTax;
     orderTotal = orderTotal.toFixed(2);
     sum = sum.toFixed(2);
     setSum(sum)
@@ -38,14 +41,13 @@ const OrderItems = ({setOrders}) => {
     setTotaltax(totalTax)
     setOrderTotal(orderTotal)
   
-    const quantityArray = [];
+    const quantityArray: any[] = [];
     cart.cartItems.map((item) => quantityArray.push(item.quantity));
     const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
     setQuantityInCart(quantityInCart)
   },[orderTotal, cart.cartItems])
 
-  let ordersjson = localStorage.getItem("orders");
-  ordersjson = JSON.parse(ordersjson);
+  let ordersjson = JSON.parse(localStorage.getItem("orders") || '""');
 
   const handleOrder = async () => {
     let body = {
@@ -82,7 +84,7 @@ const OrderItems = ({setOrders}) => {
         setOrders([[...cart.cartItems]]);
       }
     } catch (error) {
-      toast.error(error);
+      console.log(error);
     }
   };
 
@@ -115,7 +117,8 @@ const OrderItems = ({setOrders}) => {
 
         <button
           className={cart.cartItems.length > 0 ? "" : "not-allowed"}
-          disabled={cart.cartItems.length > 0 ? "" : "true"}
+          //@ts-ignore 
+          disabled={cart.cartItems.length > 0 ? "" : "true"} 
           onClick={handleOrder}
         >
           Place your order
