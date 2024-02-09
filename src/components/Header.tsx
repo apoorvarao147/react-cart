@@ -2,9 +2,9 @@ import "../styles/header.scss";
 import { Link } from "react-router-dom";
 import cartImage from "../images/shopping-cart.png";
 import logo from "../images/logo.png";
-import {Cart} from "./types"
+import {CartType} from "./types"
 
-const Header = ({ cart }: {cart: Cart}) => {
+const Header = ({ cart }: {cart: CartType}) => {
   const quantityArray: Array<number> = [];
   cart?.cartItems?.map((item) => quantityArray.push(item.quantity));
   const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);

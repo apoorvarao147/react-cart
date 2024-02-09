@@ -1,11 +1,10 @@
-//@ts-nocheck
 import "./styles/app.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Orders from "./components/Orders";
-import { useEffect, useReducer, useState, useContext } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { cartReducer } from "./components/cartReducer";
 import { CartContext } from "./components/context/cartContext";
 
@@ -18,11 +17,9 @@ const App = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    let json = localStorage.getItem("cart");
-    const savedCart = JSON.parse(json);
+    const savedCart = JSON.parse(localStorage.getItem("cart") || '""');
 
-    let ordersjson = localStorage.getItem("orders");
-    ordersjson = JSON.parse(ordersjson);
+    const ordersjson = JSON.parse(localStorage.getItem("orders") || '""');
 
     if (savedCart) {
       dispatch({type: "SAVEDCART", payload: savedCart})
