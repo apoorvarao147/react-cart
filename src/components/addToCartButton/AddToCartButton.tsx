@@ -1,8 +1,7 @@
-import "../styles/addToCartButton.scss";
+import "./addToCartButton.scss";
 import { useContext } from "react";
-import {CartContext} from "./context/cartContext"
-import toast, { Toaster } from "react-hot-toast";
-import { Product, CartItems, CartType } from "./types";
+import {CartContext} from "../context/cartContext"
+import { Product, CartItems, CartType } from "../types";
 
 type HandleQuantityProps ={
   id: string;
@@ -66,7 +65,6 @@ const HandleQuantity = ({ id, dispatch, product, cart }: HandleQuantityProps) =>
 
 const AddToCart = ({ product, dispatch }: {product: Product; dispatch: any}) => {
   const handleAdd = (product: Product) => {
-    toast.success("Added");
     dispatch({
       type: "ADD",
       payload: {
@@ -77,7 +75,6 @@ const AddToCart = ({ product, dispatch }: {product: Product; dispatch: any}) => 
   };
   return (
     <>
-      <Toaster />
       <button onClick={() => handleAdd(product)}>Add to Cart</button>
     </>
   );

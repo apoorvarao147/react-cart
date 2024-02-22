@@ -1,8 +1,6 @@
 //@ts-nocheck
 import {Link} from 'react-router-dom'
-import "../styles/orders.scss"
-import { OrdersType } from './types'
-
+import "./orders.scss"
 
 const Orders = ({orders}) => {
   return (
