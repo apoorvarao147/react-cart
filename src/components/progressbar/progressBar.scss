@@ -1,0 +1,48 @@
+.progressBar {
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-top: 1px solid rgb(222,222,222);
+  display: flex;
+  justify-content: space-around;
+  align-items:center;
+  position: sticky;
+  bottom: 0;
+
+  .continue-button {
+    padding: 8px 30px;
+    border-radius: 16px;
+    color: rgb(47,47,47);
+    font-size: 1rem;
+    font-weight: 400;
+    border: none;
+    transition: all 200ms ease;
+
+    &:hover {
+      background-color:  rgb(220, 186, 16);
+    }
+  }
+  .not-allowed {
+    cursor: not-allowed;
+    background-color: #CBD5E1;
+  }
+  .allowed {
+    cursor: pointer;
+    background-color: rgb(255,215,18);
+  }
+}
+
+progress {
+  width: 60%;
+  height : 15px;
+  border-radius: 16px;
+}
+progress::-webkit-progress-bar {
+  background-color: rgb(238,238,238);
+  border-radius: 16px;
+}
+progress::-webkit-progress-value {
+  background-color: rgb(56, 134, 91);
+  border-radius: 16px;
+  transition: all 300ms ease;
+}

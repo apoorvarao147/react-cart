@@ -13,6 +13,7 @@ const OrderItems = ({setOrders}: OrderItemsProps) => {
 
   const priceShipping = 4.99;
   const priceTax = 0.13;
+  const minPrice = 50
 
   const navigate = useNavigate();
 
@@ -116,9 +117,8 @@ const OrderItems = ({setOrders}: OrderItemsProps) => {
         </div>
 
         <button
-          className={cart.cartItems.length > 0 ? "" : "not-allowed"}
-          //@ts-ignore 
-          disabled={cart.cartItems.length > 0 ? "" : "true"} 
+          className={ Number(sum) < minPrice ? "not-allowed" : ""}
+          disabled={ Number(sum) < minPrice } 
           onClick={handleOrder}
         >
           Place your order
