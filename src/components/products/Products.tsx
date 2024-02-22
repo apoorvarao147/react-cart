@@ -1,13 +1,10 @@
 import "./products.scss";
-import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import AddToCartButton from "../addToCartButton/AddToCartButton";
-import {CartContext} from "../context/cartContext"
 import { Product } from "../types";
+import ProgressBar from "../progressbar/ProgressBar";
 
 const Products = () => {
-  const {cart} = useContext(CartContext)
-
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -36,15 +33,8 @@ const Products = () => {
           </div>
         ))}
       </div>
-      <div className="checkout">
-        <Link to={"/cart"}>
-          <button
-            className={cart.cartItems.length > 0 ? "" : "not-visible"}
-          >
-            Go to Checkout
-          </button>
-        </Link>
-      </div>
+
+    <ProgressBar />
     </>
   );
 }
