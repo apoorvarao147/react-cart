@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
-import "../styles/orderItems.scss";
+import "./orderItems.scss";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import {CartContext} from "./context/cartContext"
+import {CartContext} from "../context/cartContext"
 
 type OrderItemsProps ={
   setOrders: React.Dispatch<React.SetStateAction<any>>

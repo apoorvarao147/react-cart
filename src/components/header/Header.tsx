@@ -1,8 +1,8 @@
-import "../styles/header.scss";
+import "./header.scss";
 import { Link } from "react-router-dom";
 import cartImage from "../images/shopping-cart.png";
 import logo from "../images/logo.png";
-import {CartType} from "./types"
+import {CartType} from "../types"
 
 const Header = ({ cart }: {cart: CartType}) => {
   const quantityArray: Array<number> = [];

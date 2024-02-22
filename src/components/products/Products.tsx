@@ -1,12 +1,12 @@
-import "../styles/products.scss";
+import "./products.scss";
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import AddToCartButton from "./AddToCartButton";
-import {CartContext} from "./context/cartContext"
-import { Product } from "./types";
+import AddToCartButton from "../addToCartButton/AddToCartButton";
+import {CartContext} from "../context/cartContext"
+import { Product } from "../types";
 
 const Products = () => {
-  const {cart, dispatch} = useContext(CartContext)
+  const {cart} = useContext(CartContext)
 
   const [products, setProducts] = useState<Product[]>([]);
 

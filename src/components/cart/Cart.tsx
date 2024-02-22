@@ -1,8 +1,8 @@
-import "../styles/cart.scss";
+import "./cart.scss"
 import { useContext } from "react";
-import OrderItems from "./OrderItems";
+import OrderItems from "../orderItems/OrderItems";
 import { Link } from "react-router-dom";
-import {CartContext} from "./context/cartContext"
+import {CartContext} from "../context/cartContext"
 
 type CartProps ={
   setOrders: React.Dispatch<React.SetStateAction<any>>
