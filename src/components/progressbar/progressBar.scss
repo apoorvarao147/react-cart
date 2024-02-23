@@ -50,6 +50,7 @@ progress::-webkit-progress-value {
 @media screen and (max-width: 850px) {
   .progressBar {
     height: 90px;
+    justify-self: space-evenly;
     .continue-button {
       font-size: 1.2rem;
       font-weight: 500;
@@ -62,6 +63,6 @@ progress::-webkit-progress-value {
     }
   }
   progress {
-    width: 50%;
+    width: 40%;
   }
 } 
