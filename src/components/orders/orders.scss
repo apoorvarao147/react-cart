@@ -87,3 +87,11 @@
   }
  }
 }
+
+@media screen and (max-width: 920px) {
+  .orders {
+   > div {
+     width: 90%;
+   }
+  }
+ }
