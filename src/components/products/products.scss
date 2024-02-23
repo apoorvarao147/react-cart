@@ -70,10 +70,25 @@
 @media screen and (max-width: 920px) {
   .products-main {
     margin: 0;
-    padding: 3rem 0 0 0;
+    padding: 1rem 0 0 0;
     max-width: 670px;
     margin-left: auto;
     margin-right: auto;
+
+   .products {
+    > p {
+      font-size: 18px;
+      }
+    > h4 {
+      font-size: 21px;
+    }
+    >button {
+      height: 2.5rem;
+      font-size: 18px;
+      border-radius: 25px;
+    }
+   }
+
   }
 }
 
