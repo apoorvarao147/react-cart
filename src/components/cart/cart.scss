@@ -149,3 +149,14 @@
     }
   }
 }
+
+@media screen and (max-width: 920px) {
+  .cart-heading .cart {
+    width: 90%;
+    .cart-orders {
+      .order-items {
+        width: 100%;
+      }
+    }
+  }
+}
