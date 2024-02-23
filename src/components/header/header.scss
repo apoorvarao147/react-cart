@@ -17,6 +17,7 @@
     >a {
       display: flex;
       gap: 10px;
+
       >img {
         background-color: black;
         border-radius: 30px;
@@ -29,8 +30,6 @@
         color: black;
       }
     }
-
-    
 
     >ul {
       display: flex;
@@ -68,7 +67,6 @@
             font: 900 0.7rem "Roboto";
             border-radius: 50%;
           }
-
         }
       }
     }
@@ -77,9 +75,30 @@
 
 @media screen and (max-width: 920px) {
   .header {
+    height: 90px;
     padding: 0 25px;
-  > div > ul > li > a > p {
-    right: 12px;
+  > div {
+    font-size: 20px;
+
+    > a > h2 {
+      font-size: 25px;
+    }
+    > ul > li {
+      > a {
+        font-size: 25px;
+        > img {
+          width: 20px;
+        }
+        > p {
+          top: 45px;
+          right: 14px;
+        }
+      }
+      > p {
+        right: 12px;
+      }
+
+    }
   }
   }
 }
