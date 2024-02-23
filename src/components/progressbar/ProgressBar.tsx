@@ -23,11 +23,9 @@ const ProgressBar = () => {
   return (
     <div className="progressBar">
       <progress className="progress" value={progressVal} />
-      <div>
         <p>
           Subtotal: ${subTotal} / ${minPrice}
         </p>
-      </div>
       <div>
         <Link to={"/cart"}>
           <button
