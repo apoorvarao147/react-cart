@@ -138,3 +138,14 @@
     } 
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .cart-heading .cart {
+    .cart-orders {
+      flex-direction: column;
+      .order-items {
+        width: 100%;
+      }
+    }
+  }
+}

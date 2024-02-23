@@ -80,3 +80,10 @@
   }
 }
 
+@media screen and (max-width: 1000px) {
+ .orders {
+  > div {
+    width: 80%;
+  }
+ }
+}
