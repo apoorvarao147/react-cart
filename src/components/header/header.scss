@@ -72,6 +72,14 @@
         }
       }
     }
+  } 
+}
+
+@media screen and (max-width: 920px) {
+  .header {
+    padding: 0 25px;
+  > div > ul > li > a > p {
+    right: 12px;
   }
-  
+  }
 }
