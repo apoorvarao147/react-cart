@@ -4,7 +4,7 @@ import cartImage from "../images/shopping-cart.png";
 import logo from "../images/logo.png";
 import {CartType} from "../types"
 
-const Header = ({ cart }: {cart: CartType}) => {
+const Header = ({ cart }: {cart?: CartType}) => {
   const quantityArray: Array<number> = [];
   cart?.cartItems?.map((item) => quantityArray.push(item.quantity));
   const quantityInCart = quantityArray.reduce((acc, curr) => acc + curr, 0);
