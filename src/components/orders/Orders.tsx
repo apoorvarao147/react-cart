@@ -1,8 +1,8 @@
-//@ts-nocheck
+// @ts-nocheck
 import {Link} from 'react-router-dom'
 import "./orders.scss"
 
-const Orders = ({orders}) => {
+const Orders = ({orders}: {orders?:any}) => {
   return (
     <div className="orders">
       <div>
